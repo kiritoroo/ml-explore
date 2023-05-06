@@ -7,3 +7,5 @@ pygame-gui
 onnx
 onnx_tf
 tensorflow_probability
+scikit-learn
+joblib
