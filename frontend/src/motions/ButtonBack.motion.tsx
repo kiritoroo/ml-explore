@@ -18,11 +18,11 @@ export const MotionContainer: React.FC<IContainerProps> = React.memo(( props) =>
   const { children, color, onClick } = props;
 
   const transition = useRef<Transition>({
-    duration: 0.2, delay: 0.1, type: 'spring', mass: 1
+    duration: 0.3
   });
 
   const variants = useRef<Variants>({
-    hide: { opacity: 0, x: "-100%" },
+    hide: { opacity: 1, x: "-120%" },
     enter: { opacity: 1, x: 0 }
   })
 

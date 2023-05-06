@@ -1,5 +1,7 @@
 import { atom } from "recoil";
 
+import { IModuleInfo } from '@type/index';
+
 export const isAPIModeState = atom<boolean>({
   key: 'isAPIModeState',
   default:  true
@@ -15,7 +17,12 @@ export const colorPrimaryState = atom<string>({
   default: '#222222'
 })
 
-export const selectedModuleState = atom<String | null>({
+export const selectedModuleState = atom<IModuleInfo | null>({
   key: 'selectedModuleState',
   default: null
+})
+
+export const isScrolledState = atom<boolean>({
+  key: 'isScrolledState',
+  default: false
 })

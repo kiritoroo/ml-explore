@@ -30,7 +30,7 @@ export const App = () => {
 
       <Navbar/>
 
-      <AnimatePresence mode='wait'>
+      <AnimatePresence mode='sync'>
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<ModulesPage/>}/>
             <Route path="/face-detect" element={<FaceDetectPage/>}/>

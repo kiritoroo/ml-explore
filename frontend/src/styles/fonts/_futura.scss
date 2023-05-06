@@ -11,3 +11,17 @@
   font-weight: 400;
   font-style: normal;
 }
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/fonts/futura/SFUFuturaHeavy.TTF') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/fonts/futura/SFUFuturaBold.TTF') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}

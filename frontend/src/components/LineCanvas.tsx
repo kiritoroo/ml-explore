@@ -1,37 +1,42 @@
 import React, { useRef, useEffect, useState, useCallback } from "react";
-import * as S from '@style/comp/LineCanvas.styled';
 import { useRecoilValue } from "recoil";
-import { colorLineState } from "@store/atoms";
+import { colorPrimaryState } from "@store/atoms";
+import * as S from '@style/comp/LineCanvas.styled';
+import * as M from '@motion/LineCanvas.motion';
 
 type tCoordinates2D = {
   x: number;
   y: number;
 }
 
-export const LineCanvas = () => {
+interface Props {
+  color: string
+}
+
+export const LineCanvas = (props: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [context, setContext] = useState<CanvasRenderingContext2D>()
 
   const drawLine = useCallback((C: CanvasRenderingContext2D, offsetX: number, offsetY: number) => {
-    C.strokeStyle = "#222222";
+    C.strokeStyle = props.color;
 
     C.stroke()
     C.beginPath();
-    C.lineWidth = 0.1
+    C.lineWidth = 0.2
     C.moveTo(offsetX, 0)
     C.lineTo(offsetX, C.canvas.height)
     C.closePath()
 
     C.stroke()
     C.beginPath();
-    C.lineWidth = 0.1
+    C.lineWidth = 0.2
     C.moveTo(0, -offsetY)
     C.lineTo(C.canvas.width, -offsetY)
     C.closePath()
 
     C.stroke()
     C.beginPath()
-    C.lineWidth = 0.1
+    C.lineWidth = 0.2
     C.moveTo(offsetX-C.canvas.width*2, -offsetY-C.canvas.height*2);
     C.lineTo(offsetX+C.canvas.width*2, -offsetY+C.canvas.height*2)
     C.closePath()
@@ -82,8 +87,8 @@ export const LineCanvas = () => {
   }, [context])
 
   return (
-    <React.Fragment>
+    <M.MotionCanvasWrapper>
       <S.StyledCanvas ref={canvasRef}/>
-    </React.Fragment>
+    </M.MotionCanvasWrapper>
   )
 }

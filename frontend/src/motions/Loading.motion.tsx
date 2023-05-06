@@ -17,13 +17,13 @@ export const MotionContainer: React.FC<IContainerProps> = React.memo(( props ) =
   const { children } = props;
 
   const transition = useRef<Transition>({
-    duration: 0.3, delay: 0.1, ease: "easeInOut"
+    duration: 0.2, delay: 0.2, ease: "easeInOut"
   })
 
   const variants = useRef<Variants>({
     hidden: { opacity: 0 },
-    enter: { opacity: 1, transition: transition.current },
-    exit: { opacity: 0, transition: transition.current }
+    enter: { opacity: 1 },
+    exit: { opacity: 0 }
   })
 
   return (
@@ -31,6 +31,7 @@ export const MotionContainer: React.FC<IContainerProps> = React.memo(( props ) =
       initial="hidden"
       animate="enter"
       exit="exit"
+      transition={ transition.current }
       variants={ variants.current }
     >
       { children }

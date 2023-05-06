@@ -2,9 +2,11 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const StyledContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
-  padding: 20px 20px;
   overflow: auto;
   padding: 15vh 2vw;
 `

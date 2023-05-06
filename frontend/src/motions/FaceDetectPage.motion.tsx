@@ -14,7 +14,7 @@ interface IContainerProps {
 }
 export const MotionContainer: React.FC<IContainerProps> = React.memo(( props) => {
   const { children } = props;
-
+  
   const transition = useRef<Transition>({
     duration: 0
   });
@@ -28,9 +28,6 @@ export const MotionContainer: React.FC<IContainerProps> = React.memo(( props) =>
     <StyledContainer
       variants={ variants.current }
       transition={ transition.current }
-      initial='enter'
-      animate='enter'
-      exit='hide'
     >
       { children }
     </StyledContainer>

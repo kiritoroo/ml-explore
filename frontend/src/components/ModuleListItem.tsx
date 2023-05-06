@@ -1,21 +1,14 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import * as assets from '@asset/index';
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { colorPrimaryState, isLoadingState, selectedModuleState } from "@store/atoms";
 import * as S from '@style/comp/ModuleListItem.styled';
 import * as M from '@motion/ModuleListItem.motion';
 import { useNavigate } from 'react-router-dom'
-
-interface moduleInfo {
-  id: string
-  label: string
-  imagePath: string
-  color: string
-  url: string
-}
+import { IModuleInfo } from '@type/index';
 
 interface Props {
-  info: moduleInfo
+  info: IModuleInfo
 }
 
 export const ModuleListItem = ( props: Props ) => {
@@ -35,13 +28,17 @@ export const ModuleListItem = ( props: Props ) => {
   }, [])
 
   const handleSelectModule = useCallback(() => {
-    setSelectedModule((prevstate) => prevstate === info.id ? null : info.id)
+    setSelectedModule(info)
     setColorPrimary(info.color)
     setIsLoading(true);
     setTimeout(() => {
       navigate(info.url);
-    }, 500)
+    }, 300)
   }, [info])
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [])
 
   return (
     <M.MotionContainer
@@ -49,7 +46,7 @@ export const ModuleListItem = ( props: Props ) => {
       onMouseEnter={() => handleMouseEnter(info.color) }
       onMouseLeave={ handleMouseLeave }
       color={ info.color }
-      isSelected={ selectedModule ? selectedModule === info.id : true }>
+      isSelected={ selectedModule ? selectedModule.id === info.id : true }>
       <S.StyledImageWrapper color={ info.color }>
         <S.StyledImage src={ info.imagePath }/>
       </S.StyledImageWrapper>

@@ -4,22 +4,19 @@ import * as assets from '@asset/index';
 import * as S from '@style/comp/ModuleList.styled';
 import * as M from '@motion/ModuleList.motion';
 import { useSetRecoilState } from "recoil";
-import { selectedModuleState } from "@store/atoms";
+import { isScrolledState, selectedModuleState } from "@store/atoms";
+import { IModuleInfo } from '@type/index';
 
 interface Props {}
 
-interface moduleInfo {
-  id: string
-  label: string
-  imagePath: string
-  color: string
-  url: string
-}
-
-const moduleInfoList: moduleInfo[]  = [
+const moduleInfoList: IModuleInfo[]  = [
   {
     id: "face-detect",
     label: "FACE Detection",
+    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
+    training: ['Kien Trung'],
+    dataset: ['kaggle'],
+    algorithm: ['CNN'],
     imagePath: assets.iconModuleFaceDetectionPath,
     color: '#7F97B6',
     url: '/face-detect'
@@ -27,6 +24,10 @@ const moduleInfoList: moduleInfo[]  = [
   {
     id: "face-recog",
     label: "FACE Recognition",
+    training: ['Kien Trung'],
+    dataset: ['Kien Trung'],
+    algorithm: ['CNN', 'Yolo'],
+    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
     imagePath: assets.iconModuleFaceRecognitionPath,
     color: '#9ED5A4',
     url: '/face-recog'
@@ -34,6 +35,10 @@ const moduleInfoList: moduleInfo[]  = [
   {
     id: "face-mask",
     label: "FACE Mask \nIdentification",
+    training: ['Kien Trung'],
+    dataset: ['Kien Trung'],
+    algorithm: ['CNN', 'Yolo'],
+    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
     imagePath: assets.iconModuleFaceMaskIdentificationPath,
     color: '#F8CFCF',
     url: '/face-mask'
@@ -41,6 +46,10 @@ const moduleInfoList: moduleInfo[]  = [
   {
     id: "lp-recog",
     label: "LICENSE PLATE \nRecognition",
+    training: ['Kien Trung'],
+    dataset: ['Kien Trung'],
+    algorithm: ['CNN', 'Yolo'],
+    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
     imagePath: assets.iconModuleLicensePlateRecognitionPath,
     color: '#A57BAE',
     url: '/lp-recog'
@@ -48,6 +57,10 @@ const moduleInfoList: moduleInfo[]  = [
   {
     id: "en-digit-predict",
     label: "ENGLISH Digit Prediction",
+    training: ['Kien Trung'],
+    dataset: ['Kien Trung'],
+    algorithm: ['CNN', 'Yolo'],
+    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
     imagePath: assets.iconModuleEnglishDigitPredictionPath,
     color: '#F87876',
     url: '/en-digit-predict'
@@ -55,6 +68,10 @@ const moduleInfoList: moduleInfo[]  = [
   {
     id: "vn-digit-predict",
     label: "VIETNAMESE \nDigit Prediction",
+    training: ['Kien Trung'],
+    dataset: ['Kien Trung'],
+    algorithm: ['CNN', 'Yolo'],
+    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
     imagePath: assets.iconModuleVietnameseDigitPredictionPath,
     color: '#80B9DB',
     url: '/vn-digit-predict'
@@ -62,6 +79,10 @@ const moduleInfoList: moduleInfo[]  = [
   {
     id: "animal-clf",
     label: "ANIMAL Classification",
+    training: ['Kien Trung'],
+    dataset: ['Kien Trung'],
+    algorithm: ['CNN', 'Yolo'],
+    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
     imagePath: assets.iconModuleAnimalClassificationPath,
     color: '#ADA08C',
     url: '/animal-clf'
@@ -69,6 +90,10 @@ const moduleInfoList: moduleInfo[]  = [
   {
     id: "cali-price-predict",
     label: "Califonia House Price \nPrediction",
+    training: ['Kien Trung'],
+    dataset: ['Kien Trung'],
+    algorithm: ['CNN', 'Yolo'],
+    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
     imagePath: assets.iconModuleCalifoniaHousePricePredictionPath,
     color: '#3C3C3C',
     url: '/cali-price-predict'
@@ -76,6 +101,10 @@ const moduleInfoList: moduleInfo[]  = [
   {
     id: "fruit-clf",
     label: "FRUIT Classification",
+    training: ['Kien Trung'],
+    dataset: ['Kien Trung'],
+    algorithm: ['CNN', 'Yolo'],
+    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
     imagePath: assets.iconModuleFruitClassificationPath,
     color: '#009A96',
     url: '/fruit-clf'
@@ -84,13 +113,24 @@ const moduleInfoList: moduleInfo[]  = [
 
 export const ModuleList = ( props: Props ) => {
   const setSelectedmodule = useSetRecoilState(selectedModuleState);
-  
+  const setIsScrolled = useSetRecoilState(isScrolledState);
+
   useEffect(() => {
     setSelectedmodule(null);
   }, [])
 
+  const handleScroll = (event: any) => {
+    const div = event.target;
+    if (div.scrollTop > 50) {
+      setIsScrolled(true)
+    }
+    if (div.scrollTop < 20) {
+      setIsScrolled(false)
+    } 
+  };
+
   return (
-    <S.StyledContainer>
+    <S.StyledContainer onScroll={ handleScroll }>
       <S.StyledModuleListWrapper>
         {moduleInfoList.map((item, index) => (
           <M.MotionModuleListItemWrapper
