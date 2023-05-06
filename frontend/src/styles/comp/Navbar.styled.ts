@@ -51,7 +51,7 @@ export const StyledLinkListWrapper = styled.div`
 
 export const StyledLogo = styled(motion.div)`
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 1.75em;
   color: #0d0d0d;
 

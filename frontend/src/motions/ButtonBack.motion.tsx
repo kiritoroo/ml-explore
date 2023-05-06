@@ -22,7 +22,7 @@ export const MotionContainer: React.FC<IContainerProps> = React.memo(( props) =>
   });
 
   const variants = useRef<Variants>({
-    hide: { opacity: 1, x: "-120%" },
+    hide: { opacity: 1, x: "-150%" },
     enter: { opacity: 1, x: 0 }
   })
 

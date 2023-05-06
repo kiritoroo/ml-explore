@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState, useCallback } from "react";
-import * as S from '@style/comp/LineCanvas.styled';
-import * as M from '@motion/LineCanvas.motion';
+import React, { useRef, useEffect, useState } from "react";
+import * as S from '@style/comp/CircleCanvas.styled';
+import * as M from '@motion/CircleCanvas.motion';
 
 type tCoordinates2D = {
   x: number;
@@ -11,51 +11,44 @@ interface Props {
   color: string | null | undefined
 }
 
-export const LineCanvas = (props: Props) => {
+
+export const CircleCanvas = (props: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [context, setContext] = useState<CanvasRenderingContext2D>()
-
-  const drawLine = useCallback((C: CanvasRenderingContext2D, offsetX: number, offsetY: number) => {
-    C.strokeStyle = props.color ?? '#22222';
-
-    C.stroke()
-    C.beginPath();
-    C.lineWidth = 0.2
-    C.moveTo(offsetX, 0)
-    C.lineTo(offsetX, C.canvas.height)
-    C.closePath()
-
-    C.stroke()
-    C.beginPath();
-    C.lineWidth = 0.2
-    C.moveTo(0, -offsetY)
-    C.lineTo(C.canvas.width, -offsetY)
-    C.closePath()
-
-    C.stroke()
-    C.beginPath()
-    C.lineWidth = 0.2
-    C.moveTo(offsetX-C.canvas.width*2, -offsetY-C.canvas.height*2);
-    C.lineTo(offsetX+C.canvas.width*2, -offsetY+C.canvas.height*2)
-    C.closePath()
-  }, [])
 
   useEffect(() => {
     let animationFrameId: number;
     let speed: tCoordinates2D = { x: 0, y: 0};
+
+    const drawCircle = (C: CanvasRenderingContext2D, size: number, offsetX: number, offsetY: number) => {
+      C.beginPath();
+      C.lineWidth = 0.4;
+      C.strokeStyle = props.color ?? '#22222';
+      C.save()
+      C.beginPath()
+      C.arc(500+offsetX, -offsetY, size, 0, Math.PI * 2, false)
+      C.stroke()
+      C.restore()
+      C.closePath()
+    }
 
     const draw = () => {
       if (context) {
         const canvasWidth = context.canvas.width;
         const canvsHeight = context.canvas.height;
         const countLine = 3;
+        const sizeCircle = 200;
         const space: tCoordinates2D = { 
-          x: canvasWidth / countLine,
-          y: canvsHeight / countLine
+          x: 640/countLine + sizeCircle-sizeCircle/20,
+          y: 400/countLine + sizeCircle-sizeCircle/20
         };
         context.clearRect(0, 0, canvasWidth, canvsHeight);
         for (let i=-countLine-10; i<countLine+10;i++) {
-          drawLine(context, space.x*i + speed.x, space.y*i + speed.y)
+          drawCircle(context, sizeCircle, space.x*i + speed.x, space.y + speed.y)
+          for(let j =-countLine-10; j < countLine+10; j++) {
+            const spaceVertical = 400*j
+            drawCircle(context, sizeCircle, space.x*i + speed.x, space.y + spaceVertical + speed.y)
+          }
         }
       }
     }

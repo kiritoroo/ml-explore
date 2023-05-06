@@ -27,20 +27,44 @@ export default function FaceDetectPage() {
   }, [])
 
   return (
-    <M.MotionContainer>
+    <S.StyledContainer>
       <ButtonBack/>
       {!isLoading && selectedModule && 
       <S.StyledGridWrapper>
         <S.StyledLeftGridWrapper>
-          <div>{selectedModule?.label}</div>
-          <div>{selectedModule?.description}</div>
-          <div>training: {selectedModule?.training}</div>
+          <S.StyledModuleLabel color={ selectedModule?.color }>{selectedModule?.label}</S.StyledModuleLabel>
+          <S.StyledModuleDesc>{selectedModule?.description}</S.StyledModuleDesc>
+
+          <S.StyledTag>
+            <S.StyledTagLabel>
+              training
+            </S.StyledTagLabel> 
+            {selectedModule?.training.map((item) => (
+              <S.StyledBadge key={item} color={ selectedModule?.color }>{item}</S.StyledBadge>
+            ))}
+          </S.StyledTag>
+          <S.StyledTag>
+            <S.StyledTagLabel>
+              dataset
+            </S.StyledTagLabel> 
+            {selectedModule?.dataset.map((item) => (
+              <S.StyledBadge key={item} color={ selectedModule?.color }>{item}</S.StyledBadge>
+            ))}
+          </S.StyledTag>
+          <S.StyledTag>
+            <S.StyledTagLabel>
+              model
+            </S.StyledTagLabel> 
+            {selectedModule?.model.map((item) => (
+              <S.StyledBadge key={item} color={ selectedModule?.color }>{item}</S.StyledBadge>
+            ))}
+          </S.StyledTag>
         </S.StyledLeftGridWrapper>
         <S.StyledRightGridWrapper>
           
         </S.StyledRightGridWrapper>
       </S.StyledGridWrapper>}
-      <LineCanvas color={ selectedModule?.color ?? '#222222' } />
-    </M.MotionContainer>
+      <LineCanvas color={ selectedModule?.color }/>
+    </S.StyledContainer>
   )
 }

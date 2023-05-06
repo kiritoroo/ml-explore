@@ -5,6 +5,7 @@ import { ButtonBack } from '@comp/ButtonBack';
 import * as S from '@style/page/FaceRecogPage.styled';
 import * as M from '@motion/FaceRecogPage.styled'
 import { useNavigate } from 'react-router-dom';
+import { CircleCanvas } from '@comp/CircleCanvas';
 
 export default function FaceRecogPage() {
   const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
@@ -28,19 +29,44 @@ export default function FaceRecogPage() {
   }, [])
 
   return (
-    <M.MotionContainer>
+    <S.StyledContainer>
       <ButtonBack/>
       {!isLoading && selectedModule && 
       <S.StyledGridWrapper>
         <S.StyledLeftGridWrapper>
-          <div>{selectedModule?.label}</div>
-          <div>{selectedModule?.description}</div>
-          <div>training: {selectedModule?.training}</div>
+          <S.StyledModuleLabel color={ selectedModule?.color }>{selectedModule?.label}</S.StyledModuleLabel>
+          <S.StyledModuleDesc>{selectedModule?.description}</S.StyledModuleDesc>
+
+          <S.StyledTag>
+            <S.StyledTagLabel>
+              training
+            </S.StyledTagLabel> 
+            {selectedModule?.training.map((item) => (
+              <S.StyledBadge key={item} color={ selectedModule?.color }>{item}</S.StyledBadge>
+            ))}
+          </S.StyledTag>
+          <S.StyledTag>
+            <S.StyledTagLabel>
+              dataset
+            </S.StyledTagLabel> 
+            {selectedModule?.dataset.map((item) => (
+              <S.StyledBadge key={item} color={ selectedModule?.color }>{item}</S.StyledBadge>
+            ))}
+          </S.StyledTag>
+          <S.StyledTag>
+            <S.StyledTagLabel>
+              model
+            </S.StyledTagLabel> 
+            {selectedModule?.model.map((item) => (
+              <S.StyledBadge key={item} color={ selectedModule?.color }>{item}</S.StyledBadge>
+            ))}
+          </S.StyledTag>
         </S.StyledLeftGridWrapper>
         <S.StyledRightGridWrapper>
           
         </S.StyledRightGridWrapper>
       </S.StyledGridWrapper>}
-    </M.MotionContainer>
+      <CircleCanvas color={ selectedModule?.color }/>
+    </S.StyledContainer>
   )
 }
