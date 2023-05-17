@@ -7,6 +7,7 @@ export const StyledContainer = styled.div`
 `
 
 export const StyledImageWrapper = styled.div<{color: string}>`
+  position: relative;
   border: solid 2px ${props => props.color};
   padding: 20px;
 `

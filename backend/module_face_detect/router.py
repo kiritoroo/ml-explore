@@ -4,7 +4,7 @@ import utils as uts
 from module_face_detect import controller as ctl
 
 module_face_detect_router = APIRouter(
-  prefix="/api/router_module_face_detect",
+  prefix="/api/module_face_detect",
   tags=["Module Face Detect"]
 )
 
@@ -19,6 +19,16 @@ async def image_face_detect(
     "result_b64": uts.imgcv_to_b64(image_output)
   }
 
+@module_face_detect_router.get('/start_stream')
+async def start_stream() -> dict:
+  ctl.start_stream()
+  return {"message": "Stream started"}
+
+@module_face_detect_router.get('/stop_stream')
+async def stop_stream() -> dict:
+  ctl.stop_stream()
+  return {"message": "Stream stopped"}
+
 @module_face_detect_router.get('/stream')
 async def image_face_detect() -> dict:
 
@@ -26,9 +36,3 @@ async def image_face_detect() -> dict:
     ctl.stream_detect_face(),
     media_type="multipart/x-mixed-replace; boundary=frame"
   )
-
-streaming_running = True
-@module_face_detect_router.get('/stop_stream')
-async def stop_stream() -> dict:
-    ctl.stop_stream()
-    return {"message": "Stream stopped"}

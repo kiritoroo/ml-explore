@@ -3,6 +3,7 @@ import * as S from '@style/comp/ButtonVideoStream.styled';
 import { useRecoilValue } from "recoil";
 import { colorPrimaryState } from "@store/atoms";
 import { RiImageAddFill } from "react-icons/ri";
+import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 
 interface Props {
   onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
@@ -17,7 +18,7 @@ export const ButtonVideoStream = (props: Props) => {
     onClick={(event) => onClick(event) }
       color={ colorPrimary }>
       <S.StyledIconWrapper>
-        <RiImageAddFill/>
+        <AiOutlineVideoCameraAdd/>
       </S.StyledIconWrapper>
       <S.StyledLabel>
         Video Stream

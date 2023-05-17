@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { isLoadingState, isScrolledState, selectedModuleState } from '@store/atoms';
+import { isLoadingImageState, isLoadingState, isScrolledState, selectedModuleState } from '@store/atoms';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { ButtonBack } from '@comp/ButtonBack';
 import { AnimatePresence } from 'framer-motion';
@@ -9,8 +9,9 @@ import * as M from '@motion/FaceDetectPage.motion'
 import { LineCanvas } from '@comp/LineCanvas';
 import { ImageCard } from '@comp/ImageCard';
 import { ButtonLoadImage } from '@comp/ButtonLoadImage';
-import { GETStopStreamFaceDetect, GETVideoStreamFaceDetect, POSTImageFaceDetect } from '@api/apiService'
+import { GETStopStreamFaceDetect, GETStartStreamFaceDetect, POSTImageFaceDetect } from '@api/apiService'
 import { ButtonVideoStream } from '@comp/ButtonVideoStream';
+
 interface ImageRefs {
   setImage: React.Dispatch<React.SetStateAction<string>>
 }
@@ -18,6 +19,7 @@ interface ImageRefs {
 export default function FaceDetectPage() {
   const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
   const setIsScrolled = useSetRecoilState(isScrolledState);
+  const setIsLoadingImage = useSetRecoilState(isLoadingImageState);
   const selectedModule = useRecoilValue(selectedModuleState);
   const imageRef = useRef<ImageRefs>(null);
 
@@ -25,8 +27,11 @@ export default function FaceDetectPage() {
 
   useEffect(() => {
     if (!selectedModule) {
-      GETStopStreamFaceDetect()
       navigate('/')
+    }
+
+    return () => {
+      GETStopStreamFaceDetect()
     }
   }, [selectedModule])
 
@@ -59,7 +64,15 @@ export default function FaceDetectPage() {
   }, [imageRef.current])
 
   const handleOnVideoStreamClick = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    imageRef.current?.setImage(GETVideoStreamFaceDetect)
+    setIsLoadingImage(true)
+    GETStartStreamFaceDetect(
+      (stream_url: string) => {
+        imageRef.current?.setImage(stream_url)
+        setTimeout(() => {
+          setIsLoadingImage(false)
+        }, 500);
+      }
+    )
   }, [])
 
   return (
@@ -75,22 +88,6 @@ export default function FaceDetectPage() {
 
             <S.StyledTag>
               <S.StyledTagLabel>
-                training
-              </S.StyledTagLabel> 
-              {selectedModule?.training.map((item) => (
-                <S.StyledBadge key={item} color={ selectedModule?.color }>{item}</S.StyledBadge>
-              ))}
-            </S.StyledTag>
-            <S.StyledTag>
-              <S.StyledTagLabel>
-                dataset
-              </S.StyledTagLabel> 
-              {selectedModule?.dataset.map((item) => (
-                <S.StyledBadge key={item} color={ selectedModule?.color }>{item}</S.StyledBadge>
-              ))}
-            </S.StyledTag>
-            <S.StyledTag>
-              <S.StyledTagLabel>
                 model
               </S.StyledTagLabel> 
               {selectedModule?.model.map((item) => (
@@ -98,7 +95,6 @@ export default function FaceDetectPage() {
               ))}
             </S.StyledTag>
           </S.StyledModuleInfoWrapper>
-
 
           <S.StyledControlWrapper>
             <ButtonLoadImage 

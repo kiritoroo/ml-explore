@@ -13,7 +13,7 @@ const moduleInfoList: IModuleInfo[]  = [
   {
     id: "face-detect",
     label: "FACE Detection",
-    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
+    description: "Face Detection using the YuNet model. Users have the option to upload any image or use the webcam for detection, enabling the detection of multiple faces within a single image.",
     training: [''],
     dataset: [''],
     model: ['YuNet'],
@@ -25,11 +25,12 @@ const moduleInfoList: IModuleInfo[]  = [
   {
     id: "face-recog",
     label: "FACE Recognition",
-    training: ['Kien Trung'],
-    dataset: ['Kien Trung'],
+    training: ['Kien Trung', 'Mai Tue'],
+    dataset: ['Mr. Tien Duc', 'Kien Trung', 'Mai Tue'],
     model: ['YuNet', 'LinearSVC'],
-    description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
+    description: "Face Recognition using the Yunet and LinearSVC model. Users have the option to upload any image or use the webcam for detection and recogniton. Can recognition Kien Trung, Mai Tue, Mr. Tien Duc, Avicii and Martin Garrix face.",
     imagePath: assets.iconModuleFaceRecognitionPath,
+    examplePath: assets.exampleModuleFaceRecognitionPath,
     color: '#9ED5A4',
     url: '/face-recog'
   },

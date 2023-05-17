@@ -11,3 +11,4 @@ tensorflow_probability
 scikit-learn
 joblib
 lxml
+pillow

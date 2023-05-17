@@ -12,7 +12,9 @@ app = FastAPI(
 )
 
 from module_face_detect.router import module_face_detect_router
+from module_face_recognition.router import module_face_recog_router
 app.include_router(module_face_detect_router)
+app.include_router(module_face_recog_router)
 
 app.add_middleware(
   CORSMiddleware,

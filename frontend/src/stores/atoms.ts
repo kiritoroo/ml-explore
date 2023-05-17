@@ -26,3 +26,8 @@ export const isScrolledState = atom<boolean>({
   key: 'isScrolledState',
   default: false
 })
+
+export const isLoadingImageState = atom<boolean>({
+  key: 'isLoadingImageState',
+  default: false
+})

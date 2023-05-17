@@ -6,7 +6,7 @@ function useAxiosWrapper() {
   const axiosInstance = axios.create({
     withCredentials: true,
     baseURL: '/api',
-    timeout: 2000
+    timeout: 20000
   })
 
   return {

@@ -9,3 +9,4 @@ export const iconModuleAnimalClassificationPath = './src/assets/images/module-an
 export const iconModuleFruitClassificationPath = './src/assets/images/module-fruit-classification.jpg'
 
 export const exampleModuleFaceDetectionPath = './src/assets/images/example-face-detection.jpg'
+export const exampleModuleFaceRecognitionPath = './src/assets/images/example-face-recognition.jpg'

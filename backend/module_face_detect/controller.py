@@ -6,9 +6,19 @@ import imutils
 MODEL_DETECT_PATH = "module_face_detect/models/face_detection_yunet_2022mar.onnx"
 WIDTH_INPUT = 320
 HEIGHT_INPUT = 320
+CAPTURE_WIDTH = 640
+CAPTURE_HEIGHT = 480
+
 streaming_running = False
+vc = None
+detector = cv.FaceDetectorYN.create(
+  MODEL_DETECT_PATH, "",
+  (320, 320), 0.9, 0.3, 5000
+)
 
 def image_detect_face(image_cv: np.matrix) -> np.matrix:
+  global detector
+
   image_cv = uts.convert_to_rgb(image_cv)
   image_raw = image_cv.copy()
   image_input = image_cv.copy()
@@ -17,11 +27,6 @@ def image_detect_face(image_cv: np.matrix) -> np.matrix:
 
   WIDTH_RAW = image_raw.shape[1]
   HEIGHT_RAW = image_raw.shape[0]
-
-  detector = cv.FaceDetectorYN.create(
-    MODEL_DETECT_PATH, "",
-    (320, 320), 0.9, 0.3, 5000
-  )
 
   _, coords = detector.detect(image_input)
 
@@ -34,7 +39,6 @@ def image_detect_face(image_cv: np.matrix) -> np.matrix:
       h = h*(HEIGHT_RAW/HEIGHT_INPUT)
 
       color = (0, 255, 0)
-      thickness = 3
       thickness = 2
 
       start_point = (int(x1), int(y1))
@@ -43,28 +47,27 @@ def image_detect_face(image_cv: np.matrix) -> np.matrix:
 
   return image_output
 
-def stream_detect_face() -> None:
+def start_stream():
+  global vc
   vc = cv.VideoCapture(0, cv.CAP_DSHOW)
-  CAPTURE_WIDTH = 640
-  CAPTURE_HEIGHT = 480
   vc.set(cv.CAP_PROP_FRAME_WIDTH, CAPTURE_WIDTH)
   vc.set(cv.CAP_PROP_FRAME_HEIGHT,CAPTURE_HEIGHT)
   vc.set(cv.CAP_PROP_FPS, 30)
   vc.set(cv.CAP_PROP_FOURCC, cv.VideoWriter_fourcc(*'MJPG'))
-  width = vc.get(cv.CAP_PROP_FRAME_WIDTH)
-  height = vc.get(cv.CAP_PROP_FRAME_HEIGHT)
-  print("Available resolution:", width, "x", height)
-
-  detector = cv.FaceDetectorYN.create(
-    MODEL_DETECT_PATH, "",
-    (320, 320), 0.9, 0.3, 5000
-  )
-
+  
   global streaming_running
-
   if vc.isOpened(): streaming_running = True
   else: streaming_running = False
 
+def stop_stream():
+  global streaming_running
+  streaming_running = False
+
+def stream_detect_face() -> None:
+  global vc
+  global streaming_running
+  global detector
+  
   while streaming_running:   
     ret, frame = vc.read()
     if not ret: break
@@ -101,7 +104,3 @@ def stream_detect_face() -> None:
 
   vc.release()
   cv.destroyAllWindows()
-
-def stop_stream():
-    global streaming_running
-    streaming_running = False
