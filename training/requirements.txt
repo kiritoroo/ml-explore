@@ -2,6 +2,7 @@ numpy
 tensorflow
 opencv-python
 matplotlib
+pandas
 pygame
 pygame-gui
 onnx
@@ -9,3 +10,4 @@ onnx_tf
 tensorflow_probability
 scikit-learn
 joblib
+lxml

@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import * as S from '@style/comp/ButtonBack.styled';
 import * as M from '@motion/ButtonBack.motion';
 
-interface Props {
-}
+interface Props {}
 
 export const ButtonBack = (props: Props) => {
   const colorPrimary = useRecoilValue(colorPrimaryState);

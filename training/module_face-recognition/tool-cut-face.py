@@ -7,7 +7,7 @@ import shutil
 
 FOLDER_INPUT = "./dataset/raw"
 FOLDER_OUTPUT = "./dataset/cut-face"
-CATEGORIES = ["MartinGarrix", "Avicii"]
+CATEGORIES = ["Avicii", "KienTrung", "MaiTue", "MartinGarrix"]
 
 model_path = 'model/face_detection_yunet_2022mar.onnx'
 detector = cv.FaceDetectorYN.create(

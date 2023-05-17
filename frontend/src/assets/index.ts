@@ -7,3 +7,5 @@ export const iconModuleVietnameseDigitPredictionPath = './src/assets/images/modu
 export const iconModuleCalifoniaHousePricePredictionPath = './src/assets/images/module-califonia-house-price-prediction.jpg'
 export const iconModuleAnimalClassificationPath = './src/assets/images/module-animal-classification.jpg'
 export const iconModuleFruitClassificationPath = './src/assets/images/module-fruit-classification.jpg'
+
+export const exampleModuleFaceDetectionPath = './src/assets/images/example-face-detection.jpg'

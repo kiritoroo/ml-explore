@@ -18,6 +18,7 @@ const moduleInfoList: IModuleInfo[]  = [
     dataset: [''],
     model: ['YuNet'],
     imagePath: assets.iconModuleFaceDetectionPath,
+    examplePath: assets.exampleModuleFaceDetectionPath,
     color: '#7F97B6',
     url: '/face-detect'
   },
@@ -26,7 +27,7 @@ const moduleInfoList: IModuleInfo[]  = [
     label: "FACE Recognition",
     training: ['Kien Trung'],
     dataset: ['Kien Trung'],
-    model: ['CNN', 'Yolo'],
+    model: ['YuNet', 'LinearSVC'],
     description: "The quick brown fox jumps over the lazy dog is an English-language pangram—a phrase that contains all of the letters of the alphabet.",
     imagePath: assets.iconModuleFaceRecognitionPath,
     color: '#9ED5A4',

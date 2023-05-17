@@ -9,7 +9,8 @@
       "@type/*": ["src/types/*"],
       "@asset/*": ["src/assets/*"],
       "@util/*": ["src/utils/*"],
-      "@page/*": ["src/pages/*"]
+      "@page/*": ["src/pages/*"],
+      "@api/*": ["src/api/*"]
     }
   }
 }

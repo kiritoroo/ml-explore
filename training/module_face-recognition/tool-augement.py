@@ -13,7 +13,7 @@ def aug_combine(image_data: cv2.Mat, image_name: str, file_dir: str) -> None:
     width_shift_range=[-2, 2],
     height_shift_range=[-2, 2],
     zoom_range=0.3)
-    
+
   gen = my_gen.flow(image_data, batch_size=1)
   for index in range(numb_gen):
     my_batch = gen.next()
@@ -75,7 +75,7 @@ def aug_zoom(image_data: cv2.Mat, image_name: str, file_dir: str) -> None:
 
 IMAGES_RAW_DIR = "./dataset/re-scale"
 IMAGES_GEN_DIR = "./dataset/augement"
-CATEGORIES = ["MartinGarrix", "Avicii"]
+CATEGORIES = ["Avicii", "KienTrung", "MaiTue", "MartinGarrix"]
 
 if __name__ == "__main__":
   """ Create Directory """

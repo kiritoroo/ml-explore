@@ -24,6 +24,18 @@ export const StyledRightGridWrapper = styled.div`
 
 `
 
+export const StyledModuleInfoWrapper = styled.div`
+  margin-top: 10px;
+  margin-bottom: 50px;
+`
+
+export const StyledControlWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 20px;
+`
+
 export const StyledModuleLabel = styled.div<{color: string}>`
   display: inline-block;
   width: auto;

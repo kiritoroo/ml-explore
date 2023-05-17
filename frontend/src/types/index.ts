@@ -6,6 +6,7 @@ export interface IModuleInfo {
   training: string[]
   dataset: string[]
   imagePath: string
+  examplePath?: string
   color: string
   url: string
 }

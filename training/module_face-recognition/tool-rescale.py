@@ -7,7 +7,7 @@ import shutil
 
 FOLDER_INPUT = "./dataset/cut-face"
 FOLDER_OUTPUT = "./dataset/re-scale"
-CATEGORIES = ["MartinGarrix", "Avicii"]
+CATEGORIES = ["Avicii", "KienTrung", "MaiTue", "MartinGarrix"]
 
 SCALE_WIDTH = 120
 SCALE_HEIGHT = 120
