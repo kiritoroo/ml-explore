@@ -233,7 +233,7 @@ class Frame:
     self.image_cv = cv.imread(path)
     self.image_cv = cv.cvtColor(self.image_cv, cv.COLOR_BGR2RGB)
     self.image_cv = cv.transpose(self.image_cv)
-    self.image_width = 600
+    self.image_width = 800
     _image_scale_ratio = self.image_width / self.image_cv.shape[0]
     self.image_height = int(self.image_cv.shape[1] * _image_scale_ratio)
     self.image_cv = cv.resize(self.image_cv, (self.image_height, self.image_width))

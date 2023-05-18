@@ -15,7 +15,7 @@ export const ButtonVideoStream = (props: Props) => {
 
   return (
     <S.StyledContainer
-    onClick={(event) => onClick(event) }
+      onClick={(event) => onClick(event) }
       color={ colorPrimary }>
       <S.StyledIconWrapper>
         <AiOutlineVideoCameraAdd/>

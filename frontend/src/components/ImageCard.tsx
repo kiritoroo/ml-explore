@@ -12,7 +12,7 @@ interface Refs {
 
 export const ImageCard = React.forwardRef<Refs, Props>((props: Props, ref) => {
   const colorPrimary = useRecoilValue(colorPrimaryState);
-  const selecteedModule = useRecoilValue(selectedModuleState);
+  const selectedModule = useRecoilValue(selectedModuleState);
   const isLoadingImage = useRecoilValue(isLoadingImageState);
   const [image, setImage] = useState('');
   
@@ -30,7 +30,7 @@ export const ImageCard = React.forwardRef<Refs, Props>((props: Props, ref) => {
           src={ image }
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
-            currentTarget.src = selecteedModule?.examplePath!
+            currentTarget.src = selectedModule?.examplePath!
           }} />
       </S.StyledImageWrapper>
     </S.StyledContainer>

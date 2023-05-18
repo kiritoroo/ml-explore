@@ -10,3 +10,5 @@ export const iconModuleFruitClassificationPath = './src/assets/images/module-fru
 
 export const exampleModuleFaceDetectionPath = './src/assets/images/example-face-detection.jpg'
 export const exampleModuleFaceRecognitionPath = './src/assets/images/example-face-recognition.jpg'
+export const exampleModuleFaceMaskIdentificationPath = './src/assets/images/example-face-mask-identification.jpg'
+export const exampleModuleLicensePlateRecognitionPath = './src/assets/images/example-license-platen-recognition.jpg'

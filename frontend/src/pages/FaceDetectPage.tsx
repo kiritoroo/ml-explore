@@ -78,7 +78,7 @@ export default function FaceDetectPage() {
   return (
     <S.StyledContainer>
       <ButtonBack/>
-      {!isLoading && selectedModule && 
+      {!isLoading && selectedModule &&
       <S.StyledGridWrapper>
         <S.StyledLeftGridWrapper>
 

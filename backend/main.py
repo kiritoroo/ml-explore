@@ -13,12 +13,25 @@ app = FastAPI(
 
 from module_face_detect.router import module_face_detect_router
 from module_face_recognition.router import module_face_recog_router
+from module_face_mask.router import module_face_mask_router
+from module_license_plate.router import module_license_plate_router
+from module_en_digit.router import module_en_digit_router
+from module_vn_digit.router import module_vn_digit_router
+
+
 app.include_router(module_face_detect_router)
 app.include_router(module_face_recog_router)
+app.include_router(module_face_mask_router)
+app.include_router(module_license_plate_router)
+app.include_router(module_en_digit_router)
+app.include_router(module_vn_digit_router)
 
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=["*"],
+  allow_origins=[
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+  ],
   allow_credentials=True,
   allow_methods=["*"],
   allow_headers=["*"]
