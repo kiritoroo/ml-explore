@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import * as S from '@style/page/LPRecogPage.styled';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { isLoadingImageState, isLoadingState, isModalPredictShow, isScrolledState, selectedModuleState } from '@store/atoms';
+import { isLoadingImageState, isLoadingState, isModalPredictShowState, isScrolledState, selectedModuleState } from '@store/atoms';
 import { useNavigate } from 'react-router-dom';
 import { ButtonBack } from '@comp/ButtonBack';
 import { LineCanvas } from '@comp/LineCanvas';
@@ -21,7 +21,7 @@ export default function EnDigitPredictPage() {
   const setIsScrolled = useSetRecoilState(isScrolledState);
   const selectedModule = useRecoilValue(selectedModuleState);
   const canvasRef = useRef<CanvasRefs>(null);
-  const [isShowPredictModal, setIsShowPredictModal] = useRecoilState(isModalPredictShow);
+  const [isShowPredictModal, setIsShowPredictModal] = useRecoilState(isModalPredictShowState);
   const [predictResult, setPredictResult] = useState<string>('')
 
   const navigate = useNavigate();

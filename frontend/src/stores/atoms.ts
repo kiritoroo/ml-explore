@@ -32,7 +32,12 @@ export const isLoadingImageState = atom<boolean>({
   default: false
 })
 
-export const isModalPredictShow = atom<boolean>({
+export const isModalPredictShowState = atom<boolean>({
   key: 'isModalPredictShow',
+  default: false
+})
+
+export const isModalAboutShowState = atom<boolean>({
+  key: 'isModalAboutShowState',
   default: false
 })

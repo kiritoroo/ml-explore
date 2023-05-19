@@ -1,3 +1,6 @@
-step 1: tool-cut-face.py
-step 2: tool-rescale.py
-step 3: tool-augement.py
+Pipeline:
+  0: add category and image to raws folder
+  1: run tool-cut-face.py
+  2: run tool-rescale.py
+  3: run tool-augement.py
+  4: training.py

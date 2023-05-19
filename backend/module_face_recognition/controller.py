@@ -3,11 +3,12 @@ import cv2 as cv
 import utils as uts
 import imutils
 import joblib
+from PIL import ImageFont, ImageDraw, Image
 
 MODEL_DETECT_PATH = "module_face_recognition/models/face_detection_yunet_2022mar.onnx"
 MODEL_RECOG_PATH = "module_face_recognition/models/face_recognition_sface_2021dec.onnx"
 MODEL_SVC_PATH = "module_face_recognition/models/face_recog_svc.pkl"
-FACE_CATEGORIES = ["Avicii", "KienTrung", "MaiTue", "MartinGarrix"]
+FACE_CATEGORIES = ["Avicii", "Kiên Trung", "Mai Tuệ", "MartinGarrix"]
 WIDTH_INPUT = 320
 HEIGHT_INPUT = 320
 CAPTURE_WIDTH = 640
@@ -63,7 +64,12 @@ def image_recog_face(image_cv: np.matrix) -> np.matrix:
       start_point = (int(x1), int(y1+h))
       end_point = (int(x1+w), int(y1+h+50))
       image_output = cv.rectangle(image_output, start_point, end_point, color, -1)
-      cv.putText(image_output,result,(int(x1+20), int(y1+h+42)), cv.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 4)
+      fontpath = "assets/pro.ttf"
+      font = ImageFont.truetype(fontpath, 25 + int(WIDTH_RAW/100))
+      img_pil = Image.fromarray(image_output)
+      draw = ImageDraw.Draw(img_pil)
+      draw.text((int(x1+20), int(y1+h+10)), result, font = font, fill = (255, 255, 255))
+      image_output = np.array(img_pil)
 
   return image_output
 
@@ -127,7 +133,12 @@ def stream_detect_recog() -> None:
           start_point = (int(x1), int(y1+h))
           end_point = (int(x1+w), int(y1+h+50))
           frame_output = cv.rectangle(frame_output, start_point, end_point, color, -1)
-          cv.putText(frame_output, result, (int(x1+20), int(y1+h+42)), cv.FONT_HERSHEY_SIMPLEX, 1.5, (255, 255, 255), 4)
+          fontpath = "assets/pro.ttf"
+          font = ImageFont.truetype(fontpath, 25 + int(CAPTURE_HEIGHT/100))
+          frm_pil = Image.fromarray(frame_output)
+          draw = ImageDraw.Draw(frm_pil)
+          draw.text((int(x1+20), int(y1+h+10)), result, font = font, fill = (255, 255, 255))
+          frame_output = np.array(frm_pil)
 
     yield (
       b'--frame\r\n'

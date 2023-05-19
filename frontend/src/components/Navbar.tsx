@@ -1,8 +1,9 @@
-import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { colorPrimaryState, isScrolledState, selectedModuleState } from '@store/atoms';
+import React, { useCallback } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { colorPrimaryState, isModalAboutShowState, isScrolledState, selectedModuleState } from '@store/atoms';
 import * as S from '@style/comp/Navbar.styled';
 import * as M from '@motion/Navbar.motion';
+import { ModalAbout } from './ModelAbout';
 
 interface Props {
 
@@ -12,6 +13,11 @@ export const Navbar = ( props: Props ) => {
   const isScrolled = useRecoilValue(isScrolledState);
   const selectedModule = useRecoilValue(selectedModuleState);
   const colorPrimary = useRecoilValue(colorPrimaryState);
+  const [isShowAboutModal, setIsShowAboutModal] = useRecoilState(isModalAboutShowState);
+
+  const handleAboutClick = useCallback(() => {
+    setIsShowAboutModal(true);
+  }, [])
 
   return (
     <M.MotionContainer
@@ -25,6 +31,7 @@ export const Navbar = ( props: Props ) => {
 
         <S.StyledLinkListWrapper>
           <S.StyledLinkWrapper
+            onClick={ handleAboutClick }
             color={ colorPrimary }>
             about
           </S.StyledLinkWrapper>
@@ -35,6 +42,7 @@ export const Navbar = ( props: Props ) => {
         </S.StyledLinkListWrapper>
       </M.MotionNavbarWrapper>
       <M.MotionGradientBar isScrolled={ isScrolled }/>
+      { isShowAboutModal && <ModalAbout/> }
     </M.MotionContainer>
   )
 }

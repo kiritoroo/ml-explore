@@ -43,7 +43,7 @@ export const StyledIconCloseWrapper = styled.div<{color: string}>`
   }
 `
 
-export const StyledPredicWrapper = styled.span`
+export const StyledPredicWrapper = styled.div`
 
 `
 

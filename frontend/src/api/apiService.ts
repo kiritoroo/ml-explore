@@ -148,3 +148,56 @@ export const POSTVnDigitPredict = (
       callBack(response.predict_result);
     })
 }
+
+// API - Module Cali House Price Predict
+export const GETCaliHouseData = (
+  callBack: (data: any) => void
+) => {
+  const axiosWrapper = useAxiosWrapper();
+
+  axiosWrapper.get('/module_cali_house/data')
+    .then((response: any) => {
+      callBack(response)
+    })
+}
+
+export const GETCaliHouseRandPredict = (
+  callBack: (data: any) => void
+) => {
+  const axiosWrapper = useAxiosWrapper();
+
+  axiosWrapper.get('/module_cali_house/rand_predict')
+    .then((response: any) => {
+      callBack(response)
+    })
+}
+
+// API - Module Fruit Classification
+export const POSTImageFruitPredict = (
+  input_b64: string,
+  callBack: (result_b64: string) => void
+) => {
+  const axiosWrapper = useAxiosWrapper();
+  const formData = new FormData()
+  formData.append("b64", input_b64!)
+
+  axiosWrapper.post('/module_fruit_clf/image', formData)
+    .then((response: IPOSTImageResponse) => {
+      callBack(`data:image/jpeg;base64,${response.result_b64}`);
+    })
+}
+
+// API - Module Animal Classification
+export const POSTImageAnimalPredict = (
+  input_b64: string,
+  callBack: (result_b64: string) => void
+) => {
+  const axiosWrapper = useAxiosWrapper();
+  const formData = new FormData()
+  formData.append("b64", input_b64!)
+
+  axiosWrapper.post('/module_animal_clf/image', formData)
+    .then((response: IPredictResponse) => {
+      callBack(response.predict_result);
+    })
+}

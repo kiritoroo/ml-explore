@@ -1,7 +1,7 @@
 import React, { useCallback, useRef } from "react";
 import * as S from '@style/comp/ModalPredict.styled';
 import { useRecoilState, useRecoilValue } from "recoil";
-import { colorPrimaryState, isModalPredictShow } from "@store/atoms";
+import { colorPrimaryState, isModalPredictShowState } from "@store/atoms";
 import { MdOutlineClose } from 'react-icons/md';
 
 interface Props {
@@ -13,7 +13,7 @@ export const ModalPredict = (props: Props) => {
   const colorPrimary = useRecoilValue(colorPrimaryState);
   const containerRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  const [isShowModal, setIsShowModal] = useRecoilState(isModalPredictShow);
+  const [isShowModal, setIsShowModal] = useRecoilState(isModalPredictShowState);
 
   const handleContainerMouseClick = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (containerRef.current && modalRef.current) {

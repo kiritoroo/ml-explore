@@ -17,7 +17,9 @@ from module_face_mask.router import module_face_mask_router
 from module_license_plate.router import module_license_plate_router
 from module_en_digit.router import module_en_digit_router
 from module_vn_digit.router import module_vn_digit_router
-
+from module_cali_house.router import module_cali_house_router
+from module_fruit_clf.router import module_fruit_clf_router
+from module_animal_clf.router import module_animal_clf_router
 
 app.include_router(module_face_detect_router)
 app.include_router(module_face_recog_router)
@@ -25,6 +27,9 @@ app.include_router(module_face_mask_router)
 app.include_router(module_license_plate_router)
 app.include_router(module_en_digit_router)
 app.include_router(module_vn_digit_router)
+app.include_router(module_cali_house_router)
+app.include_router(module_fruit_clf_router)
+app.include_router(module_animal_clf_router)
 
 app.add_middleware(
   CORSMiddleware,

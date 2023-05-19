@@ -9,6 +9,7 @@ export const StyledContainer = styled.div`
   height: 100vh;
   overflow: auto;
   padding: 15vh 2vw;
+  padding-bottom: 30vh;
 `
 
 export const StyledModuleListWrapper = styled.div`

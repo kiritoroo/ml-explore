@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import * as S from '@style/page/VnDigitPredictPage.styled';
-import { isLoadingState, isModalPredictShow, isScrolledState, selectedModuleState } from '@store/atoms';
+import { isLoadingState, isModalPredictShowState, isScrolledState, selectedModuleState } from '@store/atoms';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import { ButtonPredict } from '@comp/ButtonPredict';
@@ -21,7 +21,7 @@ export default function VnDigitPredictPage() {
   const setIsScrolled = useSetRecoilState(isScrolledState);
   const selectedModule = useRecoilValue(selectedModuleState);
   const canvasRef = useRef<CanvasRefs>(null);
-  const [isShowPredictModal, setIsShowPredictModal] = useRecoilState(isModalPredictShow);
+  const [isShowPredictModal, setIsShowPredictModal] = useRecoilState(isModalPredictShowState);
   const [predictResult, setPredictResult] = useState<string>('')
 
   const navigate = useNavigate();

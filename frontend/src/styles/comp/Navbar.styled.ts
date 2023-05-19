@@ -9,6 +9,7 @@ export const StyledContainer = styled(motion.div)`
   width: 100vw;
   height: auto;
   z-index: 99999;
+  user-select: none;
 `
 
 export const StyledGradientBar = styled(motion.div)`
