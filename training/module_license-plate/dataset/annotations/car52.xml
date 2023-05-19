@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<annotation>
+   <folder>images</folder>
+   <filename>car52.jpg</filename>
+   <size>
+      <width>600</width>
+      <height>298</height>
+      <depth>3</depth>
+   </size>
+   <segmented>0</segmented>
+   <object>
+      <name>licence</name>
+      <pose>Unspecified</pose>
+      <truncated>0</truncated>
+      <occluded>0</occluded>
+      <difficult>0</difficult>
+      <bndbox>
+         <xmin>205.0</xmin>
+         <ymin>239.0</ymin>
+         <xmax>357.0</xmax>
+         <ymax>274.0</ymax>
+      </bndbox>
+   </object>
+</annotation>
